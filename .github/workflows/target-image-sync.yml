@@ -80,11 +80,12 @@ jobs:
         # docker pull ${TARGET_IMAGE}
         echo "创建配置"
         sudo hcloud configure set --cli-profile=default --cli-lang=en --cli-mode=AKSK --cli-region=cn-east-2 --cli-access-key=${{ secrets.HW_ACCESS_KEY }} --cli-secret-key=${{ secrets.HW_SECRET_KEY }} --cli-agree-privacy-statement=true
+
         echo "设置 ${BASE_IMAGE} 为公共镜像"
-        sudo hcloud SWR UpdateRepo --namespace="${{ secrets.NAMESPACE }}" --repository="${BASE_IMAGE/\//%24}" --is_public=true
+        RESPONSE=$(sudo hcloud SWR UpdateRepo --namespace="${{ secrets.NAMESPACE }}" --repository="${BASE_IMAGE/\//%24}" --is_public=true)
 
         # Check if the response matches the expected value
-        if [ $? -eq 0 ]; then
+        if [[ "$RESPONSE" == "{}" ]]; then
           echo "API call was successful and returned the expected value."
           gh issue comment ${{ github.event.issue.number }} -b "$(echo -e "\n镜像 \`${ORIGIN_IMAGE}\` 同步完成<br>请使用 \`${TARGET_IMAGE}\` 替代源镜像<br> <h1>快捷命令</h1>[去使用快捷复制和查看镜像详细信息](https://dockerimage.gbfeng.com/image/${ORIGIN_IMAGE})\n\`\`\`sh\n# Docker 拉取命令\ndocker pull ${TARGET_IMAGE}\ndocker tag ${TARGET_IMAGE} ${ORIGIN_IMAGE}\n\n# Containerd 拉取命令\nctr images pull ${TARGET_IMAGE}\nctr images tag ${TARGET_IMAGE} ${ORIGIN_IMAGE}\n\n# Shell 快速替换命令\nsed -i "s#${ORIGIN_IMAGE}#${TARGET_IMAGE}#g" 你的文件名\n\`\`\`\n")"
           gh issue edit ${{ github.event.issue.number }} --add-label "sync image succeeded" -b "IMAGE SYNC"
