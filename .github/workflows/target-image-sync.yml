@@ -65,8 +65,9 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y skopeo
-        sudo curl -sSL https://cn-north-4-hdn-koocli.obs.cn-north-4.myhuaweicloud.com/cli/latest/hcloud_install.sh -o ./hcloud_install.sh
-        sudo bash ./hcloud_install.sh -y
+        sudo curl -O https://cn-north-4-hdn-koocli.obs.cn-north-4.myhuaweicloud.com/cli/latest/huaweicloud-cli-linux-amd64.tar.gz
+        sudo tar xf huaweicloud-cli-linux-amd64.tar.gz -C /usr/bin hcloud
+        sudo rm -rf huaweicloud-cli-linux-amd64.tar.gz
     - name: Sync Docker Image
       run: |
         ORIGIN_IMAGE="${{ steps.get-image.outputs.image }}"
