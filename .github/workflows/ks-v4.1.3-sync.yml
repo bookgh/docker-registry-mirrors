@@ -192,7 +192,7 @@ jobs:
       run: |
         echo "$IMAGE_LIST" | while read -r image; do
           [ -z "$image" ] && continue       # 跳过空行
-          [[ "$line" =~ "#" ]] && continue  # 跳过注释行
+          [[ "$image" =~ "#" ]] && continue  # 跳过注释行
 
           # 提取镜像名称和标签
           dest_image="swr.cn-east-2.myhuaweicloud.com/ks/${image#*/}"
