@@ -33,8 +33,14 @@ jobs:
       env:
         IMAGE_LIST: |
           ## source  -->  dest
-          kubespheredev/builder-maven:v3.3.1-jdk17-podman    swr.cn-east-2.myhuaweicloud.com/ks/kubesphere/builder-maven:v3.3.1-jdk17-podman
-      
+          ## kubespheredev/builder-maven:v3.3.1-jdk17-podman    swr.cn-east-2.myhuaweicloud.com/ks/kubesphere/builder-maven:v3.3.1-jdk17-podman
+          kubesphere/devops-jenkins:v4.2.0-2.346.3   swr.cn-east-2.myhuaweicloud.com/ks/kubesphere/devops-jenkins:v4.2.0-2.346.3
+          kubesphere/ks-jenkins:v4.2.1-2.528.3       swr.cn-east-2.myhuaweicloud.com/ks/kubesphere/ks-jenkins:v4.2.1-2.528.3
+          kubesphere/ks-jenkins:v4.2.1-2.528.1       swr.cn-east-2.myhuaweicloud.com/ks/kubesphere/ks-jenkins:v4.2.1-2.528.1
+          kubesphere/ks-jenkins:v4.2.0-2.504.3       swr.cn-east-2.myhuaweicloud.com/ks/kubesphere/ks-jenkins:v4.2.0-2.504.3
+          kubesphere/ks-jenkins:v4.2.0-2.504.2       swr.cn-east-2.myhuaweicloud.com/ks/kubesphere/ks-jenkins:v4.2.0-2.504.2
+          kubesphere/ks-jenkins:v4.2.0-2.504.1       swr.cn-east-2.myhuaweicloud.com/ks/kubesphere/ks-jenkins:v4.2.0-2.504.1
+       
 
       run: |
         echo "$IMAGE_LIST" | while read -r image; do
