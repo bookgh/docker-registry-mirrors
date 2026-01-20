@@ -60,9 +60,9 @@ jobs:
 
           if [ $? -eq 0 ]; then
             echo "✅  Sync succeeded: $source_image"
-
-            repository=$(echo ${dest_image#*/ks/} | sed 's/\(.*\):.*/\1/')
-            sudo /usr/bin/hcloud SWR UpdateRepo --namespace="ks" --repository="${repository//\//%24}" --is_public=true
+            ns=$(echo $dest_image | awk -F / '{print $2}')
+            repository=$(echo ${dest_image#*/$ns/} | sed 's/\(.*\):.*/\1/')
+            sudo /usr/bin/hcloud SWR UpdateRepo --namespace="$ns" --repository="${repository//\//%24}" --is_public=true
           else
             echo "❌  Sync failed: $source_image"
             exit 1  # 失败时停止执行
