@@ -42,9 +42,10 @@ jobs:
           ## kubesphere/ks-jenkins:v4.2.0-2.504.1       swr.cn-east-2.myhuaweicloud.com/ks/kubesphere/ks-jenkins:v4.2.0-2.504.1
           ## kubesphere/ks-extensions-museum:latest        swr.cn-east-2.myhuaweicloud.com/ks/kubesphere/ks-extensions-museum:latest
           ## kubesphere/metrics-server:v0.8.0
-          registry.k8s.io/metrics-server/metrics-server:v0.7.2    swr.cn-east-2.myhuaweicloud.com/ks/kubesphere/metrics-server:v0.7.2
-          registry.k8s.io/metrics-server/metrics-server:v0.8.0    swr.cn-east-2.myhuaweicloud.com/ks/kubesphere/metrics-server:v0.8.0
-       
+          ## registry.k8s.io/metrics-server/metrics-server:v0.7.2    swr.cn-east-2.myhuaweicloud.com/ks/kubesphere/metrics-server:v0.7.2
+          ## registry.k8s.io/metrics-server/metrics-server:v0.8.0    swr.cn-east-2.myhuaweicloud.com/ks/kubesphere/metrics-server:v0.8.0
+          registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.13.0  swr.cn-east-2.myhuaweicloud.com/kubesre/kube-state-metrics/kube-state-metrics:v2.13.0
+          registry.k8s.io/prometheus-adapter/prometheus-adapter:v0.12.0  swr.cn-east-2.myhuaweicloud.com/kubesre/prometheus-adapter/prometheus-adapter:v0.12.0
 
       run: |
         echo "$IMAGE_LIST" | while read -r image; do
