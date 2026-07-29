@@ -49,12 +49,18 @@ jobs:
           ## grafana/grafana:11.6                                           swr.cn-east-2.myhuaweicloud.com/kubesre/grafana/grafana:11.6
           ## grafana/grafana:12.3                                           swr.cn-east-2.myhuaweicloud.com/kubesre/grafana/grafana:12.3
           ## kubesphere/kube-state-metrics:v2.15.0         swr.cn-east-2.myhuaweicloud.com/ks/kubesphere/kube-state-metrics:v2.15.0
-          higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/console:2.1.4                  swr.cn-east-2.myhuaweicloud.com/ks/higress/console:2.1.4
-          higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/higress:2.1.4                  swr.cn-east-2.myhuaweicloud.com/ks/higress/higress:2.1.4
-          higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/pilot:2.1.4                    swr.cn-east-2.myhuaweicloud.com/ks/higress/pilot:2.1.4
-          higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/gateway:2.1.4                  swr.cn-east-2.myhuaweicloud.com/ks/higress/gateway:2.1.4
-
-
+          ##higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/console:2.1.4                  swr.cn-east-2.myhuaweicloud.com/ks/higress/console:2.1.4
+          ##higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/higress:2.1.4                  swr.cn-east-2.myhuaweicloud.com/ks/higress/higress:2.1.4
+          ##higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/pilot:2.1.4                    swr.cn-east-2.myhuaweicloud.com/ks/higress/pilot:2.1.4
+          ##higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/gateway:2.1.4                  swr.cn-east-2.myhuaweicloud.com/ks/higress/gateway:2.1.4
+          docker.io/grafana/grafana:13.1.1
+          ghcr.io/jkroepke/kube-webhook-certgen:1.8.5
+          quay.io/kiwigrid/k8s-sidecar:2.10.0
+          quay.io/prometheus/alertmanager:v0.33.1
+          quay.io/prometheus/node-exporter:v1.12.1-distroless
+          quay.io/prometheus-operator/prometheus-operator:v0.92.1
+          quay.io/prometheus/prometheus:v3.13.1-distroless
+          registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.19.1
 
       run: |
         echo "$IMAGE_LIST" | while read -r image; do
@@ -63,6 +69,8 @@ jobs:
 
           source_image="${image%% *}"
           dest_image="${image##* }"
+
+          [ "$source_image" == "$dest_image" ] && dest_image=swr.cn-east-2.myhuaweicloud.com/kubesre/${source_image#*/}
 
           echo "Syncing $source_image → $dest_image"
           skopeo copy docker://$source_image docker://$dest_image
