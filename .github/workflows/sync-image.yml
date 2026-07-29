@@ -53,14 +53,15 @@ jobs:
           ##higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/higress:2.1.4                  swr.cn-east-2.myhuaweicloud.com/ks/higress/higress:2.1.4
           ##higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/pilot:2.1.4                    swr.cn-east-2.myhuaweicloud.com/ks/higress/pilot:2.1.4
           ##higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/gateway:2.1.4                  swr.cn-east-2.myhuaweicloud.com/ks/higress/gateway:2.1.4
-          docker.io/grafana/grafana:13.1.1
-          ghcr.io/jkroepke/kube-webhook-certgen:1.8.5
-          quay.io/kiwigrid/k8s-sidecar:2.10.0
-          quay.io/prometheus/alertmanager:v0.33.1
-          quay.io/prometheus/node-exporter:v1.12.1-distroless
-          quay.io/prometheus-operator/prometheus-operator:v0.92.1
-          quay.io/prometheus/prometheus:v3.13.1-distroless
-          registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.19.1
+          #docker.io/grafana/grafana:13.1.1
+          #ghcr.io/jkroepke/kube-webhook-certgen:1.8.5
+          #quay.io/kiwigrid/k8s-sidecar:2.10.0
+          #quay.io/prometheus/alertmanager:v0.33.1
+          #quay.io/prometheus/node-exporter:v1.12.1-distroless
+          #quay.io/prometheus/prometheus:v3.13.1-distroless
+          #registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.19.1
+          #quay.io/prometheus-operator/prometheus-operator:v0.92.1
+          quay.io/prometheus-operator/prometheus-config-reloader:v0.92.1
 
       run: |
         echo "$IMAGE_LIST" | while read -r image; do
